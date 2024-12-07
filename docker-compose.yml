@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  angular-app:
+    build:
+      context: ./dogedex # Path to the Angular project
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80" # Map host port 4200 to container port 80
+    volumes:
+      - ./src:/app/src # Optional: For live development
