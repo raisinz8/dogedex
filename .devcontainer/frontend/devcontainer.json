@@ -1,10 +1,10 @@
 {
 	"name": "Angular Dog Breed Pokedex",
 	"build": {
-		"dockerfile": "../../dogedex/Dockerfile"
+		"dockerfile": "../../ClientApp/Dockerfile",
 	},
 
-	"workspaceFolder": "/usr/src/app/dogedex",
+	"workspaceFolder": "/usr/src/app/ClientApp",
 	
 	// Configure tool-specific properties
 	"customizations": {
