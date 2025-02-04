@@ -3,6 +3,8 @@
 	"build": {
 		"dockerfile": "../../dogedex/Dockerfile"
 	},
+
+	"workspaceFolder": "/usr/src/app/dogedex",
 	
 	// Configure tool-specific properties
 	"customizations": {
@@ -49,6 +51,7 @@
 
 	// Use bash as default shell
 	"onCreateCommand": "echo 'Development container for Dog Breed Pokedex is ready!'",
+	"postAttachCommand": "ng serve --host 0.0.0.0 --port 4200",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "node"
