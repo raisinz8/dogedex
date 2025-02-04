@@ -1,22 +1,29 @@
-FROM node:20 AS build
+# Use the official Node.js LTS image as the base
+FROM node:20-alpine
 
+# Set working directory in the container
 WORKDIR /app
 
+# Install system dependencies
+RUN apk add --no-cache \
+    git \
+    openssh-client \
+    bash
+
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-RUN npm install
+# Install project dependencies
+RUN npm ci
 
+# Copy the rest of the project files
 COPY . .
 
-# RUN ng serve --host 0.0.0.0
-RUN npm run build
+# Expose the default Angular development server port
+EXPOSE 4200
 
-FROM nginx:alpine
-
-COPY --from=build /app/dist/dogedex /usr/share/nginx/html
-
-COPY nginx.conf /etc/nginx/nginx.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Set the default command to start the Angular development server
+CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]

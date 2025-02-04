@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "docker:build": "docker build -t dog-breed-pokedex .",
+    "docker:run": "docker run -p 4200:4200 dog-breed-pokedex"
   },
   "private": true,
   "dependencies": {
