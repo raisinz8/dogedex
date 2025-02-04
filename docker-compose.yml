@@ -3,11 +3,13 @@ services:
     build: 
       context: ./ClientApp
       dockerfile: Dockerfile
+    container_name: frontend
     ports:
       - "4200:4200"
     volumes:
-      - ./:/usr/src/app:delegated # Add delegated to improve performance on Windows
+      - .:/usr/src/app:delegated # Add delegated to improve performance on Windows
       - /usr/src/app/node_modules  # Prevent node_modules from being overwritten by the volume  
     environment:
       - NODE_ENV=development
-    command: ng serve --host 0.0.0.0 --port 4200
+      - CHOKIDAR_USEPOLLING=true
+    # command: ng serve --host 0.0.0.0 --port 4200
