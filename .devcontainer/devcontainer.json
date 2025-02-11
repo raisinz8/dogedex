@@ -6,7 +6,7 @@
     ],
 	"service": "frontend",
 
-	"workspaceFolder": "/usr/src/app/ClientApp",
+	"workspaceFolder": "/workspaces/ClientApp",
 	
 	// Configure tool-specific properties
 	"customizations": {
@@ -52,11 +52,10 @@
 	"forwardPorts": [4200],
 
 	// Use bash as default shell
-	"onCreateCommand": "echo 'Development container for Dog Breed Pokedex is ready!'",
 	"shutdownAction": "stopCompose",
     // "postCreateCommand": "npm install",
-    "postStartCommand": "npx ng serve --host 0.0.0.0 --port 4200",
-	"postAttachCommand": "npx ng serve --host 0.0.0.0 --port 4200",
+    "postStartCommand": "npm install && ng serve --host 0.0.0.0 --port 4200",
+	"postAttachCommand": "npm install && ng serve --host 0.0.0.0 --port 4200",
 
 	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
 	// "remoteUser": "node"

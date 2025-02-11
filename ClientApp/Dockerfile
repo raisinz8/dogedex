@@ -1,6 +1,6 @@
 FROM node:18
 
-WORKDIR /app
+WORKDIR /workspaces/ClientApp
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y \
@@ -31,6 +31,6 @@ COPY . .
 EXPOSE 4200
 
 # Start development server
-# CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
 
-CMD ["tail", "-f", "/dev/null"]
+ 
