@@ -1,30 +1,36 @@
-# Use the official Node.js LTS image as the base
-FROM node:20-alpine
+FROM node:18
 
-# Set working directory in the container
 WORKDIR /app
 
-# Install system dependencies
-RUN apk add --no-cache \
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
     git \
     openssh-client \
-    bash
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Angular CLI globally
-RUN npm install -g @angular/cli
+RUN npm install -g @angular/cli@latest
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy package files
+COPY package.json ./
 
-# Install project dependencies
-RUN npm ci
+# Install dependencies with specific flags
+RUN npm install \
+    --no-optional \
+    --legacy-peer-deps \
+    --force && \
+    npm install @rollup/rollup-linux-x64-gnu --force
 
 # Copy the rest of the project files
 COPY . .
 
-# Expose the default Angular development server port
+# Expose port
 EXPOSE 4200
 
-# Set the default command to start the Angular development server
-# CMD ["ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+# Start development server
+# CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "4200"]
+
 CMD ["tail", "-f", "/dev/null"]
